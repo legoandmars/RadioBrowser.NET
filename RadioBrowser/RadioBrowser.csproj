@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net5.0; netstandard2.1</TargetFrameworks>
-        <Version>0.6.1</Version>
+        <TargetFrameworks>net6.0; netstandard2.1</TargetFrameworks>
+        <Version>0.7.0</Version>
         <Title>RadioBrowser</Title>
         <Authors>bt</Authors>
         <Description>Radio Browser API wrapper</Description>
