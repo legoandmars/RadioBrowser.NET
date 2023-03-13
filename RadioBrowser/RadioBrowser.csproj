@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net5.0; netstandard2.1</TargetFrameworks>
+        <Version>0.6.1</Version>
+        <Title>RadioBrowser</Title>
+        <Authors>bt</Authors>
+        <Description>Radio Browser API wrapper</Description>
+        <Copyright>(c) 2020 by bt, GPL v3</Copyright>
+        <PackageProjectUrl>https://git.sr.ht/youkai/RadioBrowser.NET</PackageProjectUrl>
+        <PackageLicenseUrl>https://git.sr.ht/youkai/RadioBrowser.NET/blob/master/LICENSE.md</PackageLicenseUrl>
+        <RepositoryUrl>https://git.sr.ht/youkai/RadioBrowser.NET</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>API, radio browser, online radio</PackageTags>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Text.Json" Version="5.0.0" />
+    </ItemGroup>
+
+</Project>
