@@ -1,26 +1,25 @@
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace RadioBrowser.Internals.JsonConverters
 {
     public class UriConverter : JsonConverter<Uri>
     {
-        public override Uri Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Uri ReadJson(JsonReader reader, Type objectType, Uri existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             try
             {
-                return new Uri(reader.GetString()!);
+                return new Uri((string)reader.Value);
             }
             catch (UriFormatException)
             {
-                Trace.WriteLine("Cannot parse URI.");
+                // Trace.WriteLine("Cannot parse URI.");
                 return null;
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, Uri value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, Uri value, JsonSerializer serializer)
         {
             throw new NotSupportedException();
         }

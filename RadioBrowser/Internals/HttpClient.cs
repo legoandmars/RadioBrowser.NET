@@ -47,7 +47,7 @@ namespace RadioBrowser.Internals
                 }
                 catch (SocketException)
                 {
-                    Trace.Write("Cannot ping socket");
+                    // Trace.Write("Cannot ping socket");
                 }
 
             // Get clean name

@@ -1,18 +1,33 @@
+using Newtonsoft.Json;
 using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace RadioBrowser.Internals.JsonConverters
 {
-    public class BoolConverter : JsonConverter<bool>
+    public class BoolConverter : JsonConverter
     {
-        public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override bool CanConvert(Type objectType)
         {
-            var inputString = reader.GetInt16().ToString();
-            return inputString == "1";
+            return objectType == typeof(bool);
         }
 
-        public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            switch (reader.TokenType)
+            {
+                case JsonToken.String:
+                    // Assuming the JSON value is a string that represents an integer (e.g., "0" or "1")
+                    var stringValue = reader.Value.ToString();
+                    return stringValue == "1";
+                case JsonToken.Integer:
+                    // Assuming the JSON value is a number (e.g., 0 or 1)
+                    var intValue = Convert.ToInt32(reader.Value);
+                    return intValue == 1;
+                default:
+                    throw new JsonSerializationException("Unexpected token type: " + reader.TokenType);
+            }
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotSupportedException();
         }

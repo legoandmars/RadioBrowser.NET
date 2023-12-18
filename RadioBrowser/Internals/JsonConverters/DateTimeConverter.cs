@@ -1,27 +1,26 @@
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace RadioBrowser.Internals.JsonConverters
 {
     public class DateTimeConverter : JsonConverter<DateTime>
     {
-        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override DateTime ReadJson(JsonReader reader, Type objectType, DateTime existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             try
             {
-                return DateTime.ParseExact(reader.GetString()!, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture);
+                return DateTime.ParseExact((string)reader.Value, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture);
             }
             catch (FormatException)
             {
-                Trace.WriteLine("Cannot parse date.");
+                // Trace.WriteLine("Cannot parse date.");
                 return new DateTime(0);
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, DateTime value, JsonSerializer serializer)
         {
             throw new NotSupportedException();
         }

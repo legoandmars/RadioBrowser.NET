@@ -65,5 +65,17 @@ namespace RadioBrowser.Api
 
             return _converters.ToStationsList(await _httpClient.GetAsync($"stations/lastchange/{limit}"));
         }
+
+        /// <summary>
+        ///     Get stations by codec.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <returns>List of stations</returns>
+        public async Task<List<StationInfo>> GetByCodecAsync(string codec, uint limit = 0)
+        {
+            if (limit == 0) return _converters.ToStationsList(await _httpClient.GetAsync($"stations/bycodec/{codec}"));
+
+            return _converters.ToStationsList(await _httpClient.GetAsync($"stations/bycodec/{codec}/{limit}"));
+        }
     }
 }
